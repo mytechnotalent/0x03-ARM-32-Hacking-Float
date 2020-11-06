@@ -25,3 +25,100 @@ ARM 32-bit Raspberry Pi Hacking Float example in Kali Linux.
 
 ## STEP 5: Create File In VIM
 ```c
+#include <stdio.h>
+
+int main()
+{
+    float x;
+
+    x = 10.5;
+
+    printf("%0.2f\n", x);
+
+    return 0;
+}
+```
+
+## STEP 6: Save File As - 0x03_arm_32_hacking_float.c [:wq]
+
+## STEP 7: Build & Link
+```
+gcc -o 0x03_arm_32_hacking_float 0x02_arm_32_hacking_float.c
+```
+
+## STEP 8: Run Binary
+```
+./0x03_arm_32_hacking_float
+10.50
+```
+
+## STEP 9: Run Radare2 - Debug Mode
+```
+r2 -d ./0x03_arm_32_hacking_float
+```
+
+## STEP 10: Run Radare2 - Debug Step 1 [Examine Binary @ Entry Point]
+```
+aaa
+s main
+vv
+```
+![image](https://github.com/mytechnotalent/0x03_arm_32_hacking_float/blob/main/1.png?raw=true)
+
+## STEP 11: Run Radare2 - Debug Step 2 [Examine LSB & MSB @ R3]
+```
+q
+[0x0046550c]> pd 2 @ 0x00465512
+│           0x00465512      4ff00003       mov.w r3, 0
+│           0x00465516      c4f22813       movt r3, 0x4128
+```
+
+## STEP 12: Run Radare2 - Debug Step 3 [Hack float]
+```
+wa movw r3, 0xd70a @0x00465512
+wa movt r3, 0x4127 @0x00465516
+```
+
+## STEP 13: Run Radare2 - Debug Step 4 [Review Hack]
+```
+[0x0046550c]> pd 2 @ 0x00465512
+│           0x00465512      4df20a73       movw r3, 0xd70a
+│           0x00465516      c4f22713       movt r3, 0x4127
+```
+
+## STEP 14: Run Radare2 - Debug Step 5 [Hack Binary Permanently]
+```
+q
+r2 -w ./0x03_arm_32_hacking_float
+[0x000003fc]> aaa
+[0x000003fc]> s main
+[0x0000050c]> vv
+```
+![image](https://github.com/mytechnotalent/0x03_arm_32_hacking_float/blob/main/2.png?raw=true)
+```
+[0x0000050c]> wa movw r3, 0xd70a @0x00000512
+[0x0000050c]> wa movt r3, 0x4127 @0x00000516
+q
+```
+
+## STEP 15: Prove Hack
+```
+./0x03_arm_32_hacking_float
+10.49
+```
+
+** NOTE **
+If you wanted to hack from 10.50 to 10.51 instead you would simply:
+```
+[0x0000050c]> wa movw r3, 0x28f6 @0x00000512
+[0x0000050c]> wa movt r3, 0x4128 @0x00000516
+```
+This should give you a good idea how the LSB and MSB work for floating point numbers now.
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+[Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
