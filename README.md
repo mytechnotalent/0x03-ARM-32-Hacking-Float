@@ -43,7 +43,7 @@ int main()
 
 ## STEP 7: Build & Link
 ```
-gcc -o 0x03_arm_32_hacking_float 0x02_arm_32_hacking_float.c
+gcc -o 0x03_arm_32_hacking_float 0x03_arm_32_hacking_float.c
 ```
 
 ## STEP 8: Run Binary
