@@ -96,9 +96,9 @@ r2 -w ./0x03_arm_32_hacking_float
 ```
 ![image](https://github.com/mytechnotalent/0x03_arm_32_hacking_float/blob/main/2.png?raw=true)
 ```
+q
 [0x0000050c]> wa movw r3, 0xd70a @0x00000512
 [0x0000050c]> wa movt r3, 0x4127 @0x00000516
-q
 ```
 
 ## STEP 15: Prove Hack
