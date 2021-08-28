@@ -3,6 +3,16 @@
 # 0x03_arm_32_hacking_float
 ARM 32-bit Raspberry Pi Hacking Float example in Kali Linux.
 
+<br>
+
+## Join DC540 Discord [HERE](https://discord.gg/TC9V9RCr5U)
+
+<br>
+
+## FREE Reverse Engineering Self-Study Course [HERE](https://github.com/mytechnotalent/Reverse-Engineering-Tutorial)
+
+<br>
+
 ## Schematic
 ![image](https://github.com/mytechnotalent/0x02_arm_32_hacking_float/blob/main/schematic.png?raw=true)
 
